@@ -1,6 +1,8 @@
 <?php  include 'config.php'; ?>
 
 <?php 
+error_reporting(0);
+require 'Components/starRatingComp.php';
 // error_reporting(0);
 
 
@@ -113,6 +115,13 @@ catch(Exception $e)
 
 
 
+if(isset($_POST['post_comment']))
+{
+
+}
+
+
+
 ?>
 
 
@@ -125,13 +134,17 @@ catch(Exception $e)
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <?php include 'GlobalStyleLink.php'; ?>
+    <?php include 'GlobalStyleLink.php'; ?>    
+   
 </head>
-<body>
- 
+
+<body class="bg-white dark:bg-slate-900">
+
+
 <?php
-error_reporting(0);
+
  include 'NavBar.php';
+
 if(isset($_SESSION['id']))
 {
     
@@ -139,7 +152,7 @@ if(isset($_SESSION['id']))
     
     ?>
     <div>
-   <div class="w-full h-[500px] bg-blue-500 flex flex-col items-center justify-center">
+   <div class="w-full h-[500px] bg-blue-500 dark:bg-purple-700  flex flex-col items-center justify-center">
 
    <h2 class="text-6xl font-bold text-white dark:text-white text-center py-5">Explore Yourself</h2>
         
@@ -217,24 +230,41 @@ while($row = mysqli_fetch_assoc($data2))
   
 
 ?>
-<form class="w-2/5 flex items-center flex-col justify-center h-80 mb-52" action="index.php" method="POST">
+<div class="w-2/5 flex items-center flex-col justify-center h-80 mb-52" >
            
-           <div class="bg-blue-500 border-grey-500 flex flex-col rounded-lg border-2 border-blue-500  w-10/12 px-2 items-center justify-center shadow-lg shadow-grey-600">
+           <div class="bg-blue-500  dark:bg-purple-700 dark:border-slate-800  border-grey-500 flex flex-col rounded-lg border-2 border-blue-500  w-10/12 px-2 items-center justify-center shadow-lg shadow-grey-600">
                <!-- start of questionbox nav -->
                    <div class="flex items-center justify-between w-full h-12  p-2 mt-2 ">
-               <input type="hidden" name="qId" value="<?php echo $row['Qid'];?>"/>
+              
                <div class="flex flex-row items-center justify-between gap-x-2 w-2/7 ">
-               <div class="h-10 w-10 rounded-full bg-blue-600 text-white flex items-center justify-center ">A</div>
+               <div class="h-10 w-10 rounded-full bg-blue-600 dark:text-slate-100 dark:bg-purple-800 text-white flex items-center justify-center ">A</div>
                <h5 class="font-medium text-white">question By</h5>
                <h5 class=" font-semibold capitalize"><?php echo $row['name']; ?></h5>
+              <?php rating(3) ?>
+               
 </div>
-
+                    <form action="index.php" method="POST">
+                       
+                    
+                        <input type="hidden" name="id" value="<?php echo $row['Qid']; ?>
+                        <select name="rating_select"  >
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                        <button type="submit" name="rating" class="RATING inline-flex items-center py-2 px-2 text-xs font-medium text-center text-white bg-red-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-red-800">
+                         give rating 
+                        </button>
+                    </form>
                    <div><?php echo $row['time']; ?></div>
+                  
 </div>     
                <!-- end of question box navbar -->
                <hr class="my-2 h-px bg-white border-0 dark:bg-gray-700">
                <div class='w-full flex flex-row items-center flex-end px-12'>
-                   <h2 class="text-lg  font-bold text-white tracking-wide text-right">
+                   <h2 class="text-lg  font-bold text-white dark:text-slate-200 tracking-wide text-right">
                        <?php echo $row['qRelated']; ?>
 
 
@@ -242,7 +272,7 @@ while($row = mysqli_fetch_assoc($data2))
 
                </div>
        <!-- start of question box -->
-       <div class="w-11/12 bg-white m-2 rounded-lg text-lg text-blue-600 font-semibold min-h-32 h-32 mb-4 px-3  pt-1 shadow-lg shadow-blue-900">
+       <div class="w-11/12 bg-white m-2 rounded-lg text-lg text-blue-600 dark:text-slate-100 dark:bg-slate-800 font-semibold min-h-32 h-32 mb-4 px-3  pt-1 shadow-lg shadow-blue-900">
 
               <?php echo $row['question']; ?>
            </div>
@@ -304,7 +334,7 @@ while($row = mysqli_fetch_assoc($data2))
     }
 
     
-    
+   
     
     
     ?>
@@ -323,13 +353,15 @@ while($row = mysqli_fetch_assoc($data2))
  
   
    
-   <div class="mb-6 w-9/12">
+   <form class="mb-6 w-9/12" action="index.php" method="POST" >
+   <input type="hidden" name="qId" value="<?php echo $row['Qid'];?>"/>
    <label for="large-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">your answer</label>
    <input type="text" id="large-input" name="answer" class="block w-full p-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
    
-</div>  
+
 
 <button type="submit" name="post_answer" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">answer it</button>
+</form>  
 </ol>
 <!-- end of answer box        -->
        
@@ -338,7 +370,7 @@ while($row = mysqli_fetch_assoc($data2))
 
 
 
-</form>
+</div>
 
 
 
@@ -403,5 +435,5 @@ const ols = document.getElementsByClassName('answer')
 
 
 </script>
-          
+
 </html>

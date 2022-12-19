@@ -22,9 +22,16 @@ $query1 ="SELECT * FROM `questions` WHERE `StudentId` = '".$_SESSION['id']."'";
 $data3 =mysqli_query($data,$query1);
 
 $qsn =mysqli_fetch_assoc($data3);
+if($qsn !=null)
+{
+    $qsns= count($qsn);
+}
+else
+{
+    $qsns=0;
+}
 
-
-$qsns= count($qsn);
+// $qsns= count($qsn);
 
 $query4= "SELECT * FROM `answer` WHERE `uId` = '".$_SESSION['id']."'";
 $data4= mysqli_query($data,$query4);
@@ -73,33 +80,43 @@ if(isset($_POST['delete_qsn']))
     <?php include 'GlobalStyleLink.php'; ?>
     <title>Document</title>
 </head>
-<body>
-    <?php include 'NavBar.php'; ?>
-    <div class="p-16">
-        <div class="p-8 bg-white shadow mt-24">  
+<body class="bg-white dark:bg-slate-900 ">
+    <?php include 'Navbar.php'; ?>
+    <div class="p-16 ">
+        <div class="p-8 bg-white shadow mt-24 dark:bg-slate-700">  
             <div class="grid grid-cols-1 md:grid-cols-3">  
                   <div class="grid grid-cols-1 text-center order-last md:order-first mt-20 md:mt-0">      <div>      
-                      <p class="font-bold text-gray-700 text-xl">
+                      <p class="font-bold text-gray-700  dark:text-slate-100 text-xl">
 
-            <?php echo $qsns; ?>
+            <?php echo $qsns ?>
 
                       </p>        
                       <p class="text-gray-400">Questions</p>      </div>      
                             
                             
                                  </div>   
-                                  <div class="relative">     
-                                     <div class="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
-                                    <div class="w-40 h-40 text-7xl text-white flex justify-center  items-center rounded-full bg-blue-600 uppercase">
+                                  <div class="relative ">     
+                                     <div class="w-48 h-48 bg-indigo-100  mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
+                                    <div class="w-40 h-40 text-7xl text-white flex justify-center dark:bg-purple-800 items-center rounded-full bg-blue-600 uppercase">
                                     <?php echo substr(  $user[1],0,1); ?>
                                     </div>
                                        </div>  
                                       </div>   
                                        <div class=" flex justify-center items-center  mt-32 md:mt-0 md:justify-center">
                                        <div>          
-                         <p class="font-bold text-gray-700 text-xl">
+                         <p class="font-bold text-gray-700 dark:text-slate-100  text-xl">
 
-                            <?php echo count($answer); ?>   
+                            <?php if($answer !=null)
+                                        {
+                                            $anss= count($answer);
+                                            echo $anss;
+                                        }
+                                        else
+                                        {
+                                            echo 0;
+                                        }
+                            
+                            ?>   
 
                          </p>       
                           <p class="text-gray-400">answers</p>  
@@ -107,12 +124,12 @@ if(isset($_POST['delete_qsn']))
                                           </div> 
                                          </div> 
                                           <div class="mt-20 text-center border-b pb-12"> 
-                                               <h1 class="text-4xl font-medium text-gray-700">
+                                               <h1 class="text-4xl font-medium text-gray-700 dark:text-slate-100">
                                                <?php echo $user[1]; ?> 
                                                
-                                               <span class="font-light text-gray-500">    <?php echo $user[4]; ?>  std</span>
+                                               <span class="font-light text-gray-500 dark:text-slate-50">    <?php echo $user[4]; ?>  std</span>
                                             </h1>   
-                                             <p class="font-light text-gray-600 mt-3">
+                                             <p class="font-light text-gray-600 dark:text-slate-100 mt-3">
                                                     <?php echo $user[2]; ?>
 
                                              </p>  
@@ -123,15 +140,15 @@ if(isset($_POST['delete_qsn']))
                                                  </p>  
                                                 </div> 
                                                  <div class="mt-12 flex flex-col justify-center">  
-                                                      <p class="text-gray-600 text-center font-light lg:px-16">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis aut accusamus sunt eligendi ab recusandae minus voluptatem quam enim, vero omnis laborum fugit. In cumque amet error doloribus porro iure..
+                                                      <p class="text-gray-600 dark:text-slate-50 text-center font-light lg:px-16">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nobis aut accusamus sunt eligendi ab recusandae minus voluptatem quam enim, vero omnis laborum fugit. In cumque amet error doloribus porro iure..
 
                                                       </p>   
-                                                       <button  class="text-indigo-500 py-2 px-4  font-medium mt-4">  Show more</button> 
+                                                       <button  class="text-indigo-500 py-2 px-4 dark:text-slate-200 font-medium mt-4">  Show more</button> 
                                                      </div>
                                                     </div>
 
 
-    <div class="w-full flex gap-x-2 gap-y-2 flex-wrap ">
+    <div class="w-full flex gap-x-2 gap-y-2 flex-wrap items-center justify-center my-12 ">
         
    
 
@@ -146,12 +163,12 @@ if(isset($_POST['delete_qsn']))
            
                 ?>
 
-            <div class="w-80 h-32 p-2 border-blue-500 border-2 shadow-lg shadow-grey-600 rounded-lg text-black text-xs flex flex-col items-center flex-start">
+            <div class="w-80 h-32 p-2 border-blue-500  dark:bg-slate-600  dark:border-purple-700 border-2 shadow-lg shadow-grey-600 rounded-lg text-black text-xs flex flex-col items-center flex-start">
 
             
                 <div class="flex flex-col items-center flex-start"  >
-                    <p class="text-sm font-bold text-left">Question</p>
-                    <p class="text-xs font-light"><?php echo $row['question']; ?></p>
+                    <p class="text-sm font-bold text-left dark:text-slate-100">Question</p>
+                    <p class="text-xs font-light dark:text-slate-50"><?php echo $row['question']; ?></p>
                     <span class=" mt-1 ml-1
                     
                     <?php if($row['isAns']==1)
@@ -189,7 +206,7 @@ if(isset($_POST['delete_qsn']))
                         
                 <div class="flex flex-end h-8 w-full">
                     <div class="w-1/10 h-full flex items-center justify-center">
-                        <button  class=" DELETE_BTN w-10 h-10 bg-blue-500 flex items-center justify-center text-white rounded-full " data-modal-toggle="popup-modal">
+                        <button  class=" DELETE_BTN w-10 h-10 bg-blue-500 dark:bg-purple-700 flex items-center justify-center text-white rounded-full " data-modal-toggle="popup-modal">
                         <i class="fa-solid fa-trash "></i>
                         </button >
                     </div>
@@ -198,7 +215,7 @@ if(isset($_POST['delete_qsn']))
                     <input type="hidden" name="id" value="<?php echo $row['Qid']; ?>">
                     <input type="hidden" name="photoQ" value="<?php echo $row['photoQuestion']; ?>">
                         <input type="hidden" name="qsn" value="<?php echo $row['question']; ?>">
-                        <button  type="submit" name="question_submit" class="VIEW_BTN w-10 h-10 bg-blue-500 flex items-center justify-center text-white rounded-full" data-modal-toggle="staticModal" >
+                        <button  type="submit" name="question_submit" class="VIEW_BTN w-10 dark:bg-purple-700 h-10 bg-blue-500 flex items-center justify-center text-white rounded-full" data-modal-toggle="staticModal" >
                         <i class="fa-solid fa-eye"></i>
                         </button >
                     </form>

@@ -32,9 +32,9 @@ $topicData = mysqli_query($data,$queryTopic);
     <?php include 'GlobalStyleLink.php'; ?>
     <title>Document</title>
 </head>
-<body>
+<body class="bg-white dark:bg-slate-900">
 <?php include 'NavBar.php'; ?>
-<div class="w-screen flex items-center text-lg md:text-4xl justify-center font-semibold  text-center bg-blue-600 text-white h-[200px] uppercase">
+<div class="w-screen flex items-center text-lg md:text-4xl justify-center font-semibold  text-center bg-blue-600 dark:bg-purple-700  text-white h-[200px] uppercase">
 QUESTION OF <?php echo $selected_topic; ?>
 
 </div>

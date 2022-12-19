@@ -1,9 +1,9 @@
 <?php 
 session_start();
-define('USER', '');  //add your username here
-define('PASSWORD', ''); //add your password here
+define('USER', 'root');
+define('PASSWORD', '');
 define('HOST', 'localhost');
-define('DATABASE', '');   //add your schema namehere
+define('DATABASE', 'question_answer');
 
 
 $data =mysqli_connect(HOST, USER, PASSWORD, DATABASE,3306) ;

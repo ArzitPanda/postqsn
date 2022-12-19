@@ -44,7 +44,7 @@ if(isset($_POST['question_submit']))
     <title>Document</title>
     <?php include 'GlobalStyleLink.php'; ?>
 </head>
-<body>
+<body class="bg-white dark:bg-slate-900">
     <?php include 'Navbar.php'; ?>
 <div class="mb-10 mt-24 border-2 mx-auto rounded-lg shadow-lg shadow-green-600 border-blue-500 h-[400px] w-11/12 ">                        
                   <h3 class="flex items-center mb-4 text-lg font-medium text-gray-900 dark:text-white">

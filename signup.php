@@ -21,13 +21,26 @@ if(isset($_POST['signUp']))
     $standard = $_POST['standard'];
     $phone = $_POST['phone'];
 
-$query = "INSERT INTO `user`(`name`, `email`, `password`, `school`, `standard`, `phone`) VALUES ('$name','$email','$password','$school','$standard','$phone')";
 
-$data2 =mysqli_query($data,$query);
 
-$user =mysqli_fetch_row($data2);
+$sql_val="SELECT * FROM `user` WHERE `email`='$email'";
+$data_val=mysqli_query($data,$sql_val);
+if(mysqli_num_rows($data_val)>0)
+{
+    echo "<script>alert('Email already exist')</script>";
+    // header('location:signup.php');
+}
+else
+{
+    $query = "INSERT INTO `user`(`name`, `email`, `password`, `school`, `standard`, `phone`) VALUES ('$name','$email','$password','$school','$standard','$phone')";
 
-if($user)
+    $data2 =mysqli_query($data,$query);
+
+    $get_user_data = "SELECT * FROM `user` WHERE `email`='$email' AND `password`='$password'";
+    $user_data = mysqli_query($data,$get_user_data);
+    $user = mysqli_fetch_array($user_data);
+
+    if($user)
 {
     $_SESSION['password']=$password;
         $_SESSION['id']=$user[0];
@@ -48,6 +61,17 @@ else
 
 
 }
+
+header('location:signup.php');
+}
+
+
+
+
+
+
+
+
 }
 
 
@@ -67,7 +91,7 @@ else
     <title>Document</title>
     <?php include 'GlobalStyleLink.php'; ?>
 </head>
-<body >
+<body class="bg-white dark:bg-slate-900">
  
 
 

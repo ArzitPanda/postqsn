@@ -62,14 +62,14 @@ if(isset($_POST['login']))
     <?php include 'GlobalStyleLink.php'; ?>
     <title>login or signup</title>
 </head>
-<body>
+<body class="bg-white dark:bg-slate-900">
 <?php include 'Navbar.php'; ?>
-<div class="flex flex-col items-center justify-center w-full my-12">
+<div class="flex flex-col items-center justify-center w-full my-12 ">
 <h2 class="text-4xl font-bold dark:text-white ">Log in</h2>
 </div>
 <div class="w-screen  h-80 flex flex-col items-center justify-center mt-10 ">
 
-<form action="" method="POST"   >
+<form action="" method="POST" class=""  >
 
 <div class="mb-6">
 
@@ -84,11 +84,11 @@ if(isset($_POST['login']))
     </div> 
    
    
-    <button type="submit" name="login" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">login</button>
+    <button type="submit" name="login" class="text-white bg-blue-700 dark:bg-purple-700  hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center  dark:hover:bg-blue-700 dark:focus:ring-blue-800">login</button>
 
 
 </form>
-<h5>not having an account? <span><a href="signup.php">sign up</a></span></h5>
+<h5 class="dark:text-white">not having an account? <span><a href="signup.php">sign up</a></span></h5>
 </div>
 
 
